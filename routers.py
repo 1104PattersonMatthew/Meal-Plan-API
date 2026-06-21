@@ -2,7 +2,13 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from uuid import uuid4
 from datetime import datetime
 
-from models import MealCreate, MealResponse
+from models import (
+    MealCreate,
+    MealResponse,
+    MealSummaryResponse,
+    ShoppingListResponse,
+    MessageResponse
+)
 from storage import read_data, write_data
 from auth import verify_api_key
 
@@ -14,7 +20,7 @@ router = APIRouter(
 
 DATA_FILE = "data/meals.json"
 
-#creates a meal
+
 @router.post(
     "/meals",
     response_model=MealResponse,
@@ -38,10 +44,11 @@ def create_meal(meal: MealCreate):
 
     return new_meal
 
-#returns all meals in json
+
 @router.get(
     "/meals",
     response_model=list[MealResponse],
+    status_code=status.HTTP_200_OK,
     summary="Get all meals",
     description="Returns all saved meal plan entries.",
     responses={
@@ -54,6 +61,8 @@ def get_all_meals():
 
 @router.get(
     "/meals/summary",
+    response_model=MealSummaryResponse,
+    status_code=status.HTTP_200_OK,
     summary="Get meal summary",
     description="Returns a simple summary showing how many meals exist for each meal type.",
     responses={
@@ -91,6 +100,8 @@ def get_meal_summary():
 
 @router.get(
     "/shopping-list",
+    response_model=ShoppingListResponse,
+    status_code=status.HTTP_200_OK,
     summary="Generate shopping list",
     description="Creates a simple shopping list by combining all ingredients from all meals.",
     responses={
@@ -114,6 +125,7 @@ def get_shopping_list():
 @router.get(
     "/meals/{meal_id}",
     response_model=MealResponse,
+    status_code=status.HTTP_200_OK,
     summary="Get one meal",
     description="Returns one meal plan entry by its unique ID.",
     responses={
@@ -137,6 +149,7 @@ def get_meal_by_id(meal_id: str):
 @router.put(
     "/meals/{meal_id}",
     response_model=MealResponse,
+    status_code=status.HTTP_200_OK,
     summary="Update a meal",
     description="Updates an existing meal plan entry by its unique ID.",
     responses={
@@ -167,6 +180,8 @@ def update_meal(meal_id: str, updated_meal: MealCreate):
 
 @router.delete(
     "/meals/{meal_id}",
+    response_model=MessageResponse,
+    status_code=status.HTTP_200_OK,
     summary="Delete a meal",
     description="Deletes an existing meal plan entry by its unique ID.",
     responses={

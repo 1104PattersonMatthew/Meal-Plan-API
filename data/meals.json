@@ -1,19 +1,5 @@
 [
     {
-        "id": "1",
-        "day": "Monday",
-        "meal_type": "Breakfast",
-        "meal_name": "Oatmeal with Banana",
-        "ingredients": [
-            "oats",
-            "banana",
-            "milk",
-            "cinnamon"
-        ],
-        "notes": "Quick breakfast before work",
-        "created_at": "2026-06-19T08:00:00"
-    },
-    {
         "id": "2",
         "day": "Monday",
         "meal_type": "Lunch",
@@ -74,12 +60,12 @@
     {
         "day": "Friday",
         "meal_type": "Lunch",
-        "meal_name": "Spaghetti",
+        "meal_name": "spaghetti",
         "ingredients": [
-            "sauce",
-            "pasta"
+            "pasta",
+            "sauce"
         ],
-        "notes": "none",
+        "notes": "no",
         "id": "56f746a9-fff1-4669-8506-91c4c4837a00",
         "created_at": "2026-06-19T12:19:44.980985"
     }
